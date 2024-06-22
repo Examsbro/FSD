@@ -1,0 +1,242 @@
+week-8
+
+Write MongoDB model for the user and query to fetch user, validate and register.
+
+Code:-
+
+Database.js:-
+
+const {MongoClient} =require('mongodb'); const url = 'mongodb://127.0.0.1:27017'; const client= new MongoClient(url);
+let collection;
+//can also export like as follows
+ 
+// module.exports={getData,insertData};
+
+async function connectDB(dbname,table)
+{
+let result=await client.connect(); let db= result.db(dbname); collection = db.collection(table);
+console.log("DataBase Connected..."); return collection;
+}
+
+exports.getData=async function (name,password)
+{
+collection = await connectDB("cse","employee");
+let response = await collection.find({name:name,password:password}).toArray(); console.log("From getData method: "+JSON.stringify(response)); collection.close;
+return JSON.stringify(response);
+}
+
+exports.insertData=async function (emp)
+{
+collection = await connectDB("cse","employee"); let response=await
+collection.insertOne({name:emp.name,work:emp.work,password:emp.password}) console.log("Record inserted Successfully");
+collection.close;
+return JSON.stringify(response);
+}
+
+
+Login.html:-
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login Page</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+const form=$("#loginForm");
+$(document).ready(function() {
+$("#loginForm").submit((event)=>{ event.preventDefault();
+var name = $("#username").val(); var password=$("#pwd").val();
+//generateToken by making a service call to /auth with post
+$.ajax({
+url:"/auth",
+type:"POST", contentType:"application/json", dataType:"json",
+data: JSON.stringify({ name: name,
+password: password
+ 
+}),
+success: function(data)
+{
+var tokenData=data; if(tokenData.login==true){
+console.log("token data: "+JSON.stringify(tokenData)); localStorage.setItem("username",tokenData.data[0].name); localStorage.setItem("job",tokenData.data[0].work); if(verifyLogin(tokenData.token))
+{
+window.location.href="/welcome";
+}
+else{
+alert("Authentication Failed");
+}
+}
+ 
+
+
+
+
+
+
+
+});
+ 
+},
+error: function(data ){ console.log("Something went wrong");
+}
+});
+});
+ 
+
+function verifyLogin(token)
+{
+let result=true;
+//verifyToken by making a service call to /verifyToken with get
+$.ajax({ url:"/verifyToken", type:"POST",
+contentType:"application/json", dataType:"json",
+data: JSON.stringify({ token: token,
+}),
+success: function(data) { if(data.login==true)
+{
+result=true;
+}
+else
+{
+result=false;
+}
+},
+error: function(data ){
+console.log("Wrong Token, Not Authenticated.");
+}
+});
+return result;
+}
+</script>
+<body>
+<h2>Sign In</h2>
+ 
+<form id="loginForm">
+<label for="username">Username:</label><br>
+<input type="text" id="username" name="username"><br>
+<label for="pwd">Password:</label><br>
+<input type="password" id="pwd" name="pwd"><br><br>
+<input type="submit" value="Submit">
+</form>
+</body>
+</html>
+
+Server.js:-
+// Import express for creating API's endpoints const express = require("express");
+const db = require("./database.js"); const {MongoClient} =require('mongodb'); var token;
+
+// Import jwt for API's endpoints authentication const jwt = require("jsonwebtoken");
+
+// Creates an Express application, initiate
+// express top level function const app = express();
+
+// A port for serving API's const port = 3000;
+
+// Allow json data app.use(express.json());
+
+app.get('/',
+(req, res) => {
+res.sendFile( dirname + '/index.html');
+});
+app.get('/welcome', (req, res) => {
+res.sendFile( dirname + '/welcome.html');
+});
+app.get('/signup', (req, res) => {
+res.sendFile( dirname + '/signup.html');
+});
+app.get('/login', (req, res) => {
+res.sendFile( dirname + '/login.html');
+});
+
+// SignUp route
+app.post("/register", async(req, res) => {
+// Get the name to the json body data const name = req.body.name;
+
+// Get the password to the json body data
+ 
+const password = req.body.password;
+
+// Get the profession to the json body data const work = req.body.work;
+tuple= await db.getData(name,password); if(JSON.parse(tuple).length>0){ res.json({
+signup: false, token: null,
+error: "Already registered",
+});
+} else {
+
+// The jwt.sign method are used
+// to create token
+const token = jwt.sign(tuple, "secret");
+
+let emp =
+{
+name: name, work: work,
+password: password, token:token
+};
+
+let result=await db.insertData(emp); res.json({
+signup: true, token: "generated", result:result
+ 
+
+
+});
+ 
+});
+}
+ 
+
+
+// Login route
+app.post("/auth", async (req, res) => {
+// Get the name to the json body data
+
+const name = req.body.name; console.log(name);
+
+// Get the password to the json body data const password = req.body.password; console.log(password)
+
+tuple=await db.getData(name,password); if (JSON.parse(tuple).length>0) {
+// The jwt.sign method are used
+// to create token
+const token = jwt.sign(tuple, "secret");
+
+// Pass the data or token in response
+ 
+res.json({
+login: true, token: token,
+data: JSON.parse(tuple),
+});
+} else {
+res.json({
+login: false,
+error: "please check name and password.",
+});
+}
+});
+
+// Verify route
+app.post("/verifyToken", (req, res) => {
+
+// Get token value to the json body const token = req.body.token;
+
+// If the token is present if (token) {
+
+// Verify the token using jwt.verify method const decode = jwt.verify(token, "secret");
+
+// Return response with decode data res.json({
+login: true, data: decode,
+});
+} else {
+
+// Return response with error res.json({
+login: false, data: "error",
+});
+}
+});
+
+app.post('/welcome',(req, res) => { res.redirect("/welcome")
+});
+app.post('/login',(req, res) => { res.redirect("/login")
+});
+app.post('/signup',(req, res) => { res.redirect("/signup")
+});
+
+// Listen the server app.listen(port, () => {
+console.log(`Server is running : http://localhost:${port}/`);
+});

@@ -1,0 +1,146 @@
+week-6
+
+Write middleware to validate users and generate JWT.
+
+Code:-
+
+database.json:-
+[	{"name":"anusha","work":"Assistant Professor","password":"anu"},
+{"name":"radha","work":"Assistant Professor","password":"radha12"},
+{"name":"jaya","work":"Assistant Professor","password":"jaya12"}
+
+]
+
+login.html:-
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login</title>
+<style> h2{
+display:none;
+}
+</style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+const form=$("#loginForm");
+$(document).ready(function(){
+$("#loginForm").submit( (event)=>{
+event.preventDefault();
+var name=$("#username").val(); var password=$("#pwd").val();
+$.ajax({
+url:"/auth",
+type:"POST", contentType:"application/json", dataType:"json", data:JSON.stringify({
+name:name, password:password
+}),
+success:function(data){ var tokenData=data;
+ 
+if(tokenData.login==true){ if(verifyLogin(tokenData.token)){
+$("#verified").show();
+$("#not-verified").hide();
+alert("JWT Token: "+tokenData.token);
+}
+}
+else{
+$("#verified").hide();
+$("#not-verified").show(); alert("Authentication Failed");
+}
+},
+error:function(data){ console.log("Something went wrong");
+}
+});
+});
+});
+function verifyLogin(token)
+{
+let result=true;
+$.ajax({ url:"/verifyToken", type:"POST",
+contentType:"application/json", dataType:"json", data:JSON.stringify({
+token:token,
+}),
+success:function(data){ if(data.login==true)
+{
+result=true;
+}
+else{
+result=false;
+}
+},
+error:function(data){
+ 
+console.log("wrong Token, Not Authenticated.");
+}
+});
+return result;
+}
+</script>
+</head>
+<body>
+<center>
+<h1>Login Page</h1>
+<form id="loginForm">
+<label for="username">UserName:</label><br>
+<input type="text" id="username" name="username"><br>
+<label for="pwd">Password:</label><br>
+<input type="password" id="pwd" name="pwd"><br>
+<input type="submit" value="Submit">
+</form>
+<h2 id="verified">You are a verified user</h2>
+<h2 id="not-verified">You are not a verified user</h2>
+</center>
+</body>
+</html>
+
+server1.js:-
+//import express for creating APIs endpoints const express=require("express");
+const path=require("path"); const fs=require("fs");
+const users=require("./database.json");
+
+var database;
+var token="wrong key";
+//Read database.json file fs.readFile("database.json",function(err,data){
+//check for errors if(err) throw err;
+//Converting to JSON database=JSON.parse(data);
+});
+ 
+const jwt=require("jsonwebtoken"); const app=express();
+const port=3001; app.use(express.json()); app.get('/',(req, res)=>{
+res.sendFile(	dirname+'/login.html');
+});
+app.post("/auth",(req,res)=>{ const name=req.body.name; console.log(name);
+const password=req.body.password; console.log(password);
+let isPresent=false;
+let isPresentIndex=null;
+for(let i=0;i<database.length;i++){
+if(database[i].name===name && database[i].password===password){ isPresent=true;
+isPresentIndex=i; break;
+}
+}
+if(isPresent){
+const token=jwt.sign(database[isPresentIndex],"secret"); res.json({
+login:true, token:token,
+data:database[isPresentIndex],
+});
+}
+else{
+res.json({ login:false, token:token,
+error:"please check name and password"
+});
+}
+});
+app.post("/verifyToken", (req, res)=>{ const token=req.body.token; if(token){
+const decode=jwt.verify(token,"secret");
+ 
+res.json({ login:true, data:decode
+});
+}
+else{
+res.json({ login:false, data:"error"
+});
+}
+});
+app.post('/login',(req, res)=>{ res.redirect("/login");
+});
+app.listen(port, ()=>{
+console.log(`Server is running:http://localhost:${port}/`);
+});
+

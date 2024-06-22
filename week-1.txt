@@ -1,0 +1,158 @@
+week-1
+
+Demonstrate version control in Git and Github using simple html code.
+
+code:
+
+SOURCE CODE:
+
+
+While working on Git, we actively use two repositories.
+
+•	(Git)Local repository: The local repository is present on our computer and consists of all the files and folders. This Repository is used to make changes locally, review history, and commit when offline.
+•	(GitHub)Remote repository: The remote repository refers to the server repository that may be present anywhere. This repository is used by all the team members to exchange the changes made.
+Both repositories have their own set of commands. There are separate Git Commands that work on different types of repositories.
+
+Step 1:-Create one Folder week1
+
+Step2:-Create one HTML File index.html in week1 folder. Code:-
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Week1</title>
+
+</head>
+
+<body style="background-color:rgb(0, 217, 255)">
+
+<center>
+
+<h1 style="color:red">Welcome to CSD-C Sec</h1>
+
+<p style="color:blue">My classroom is also a beautiful place for me.<br>
+ 
+There are many types of students in my class. <br>
+
+Some are good at extracurricular activities, some at academics, and some love participating in competitions.
+
+<br> My classroom also has different students from all over the country, which makes it unique.</p>
+
+<img src="class.jfif" alt="class room">
+
+</center>
+
+</body>
+
+</html>
+
+Write above code in index.html. After completion of code save and run you get output like
+
+
+
+Step 3:-use cmd (or) terminal in visual studio (or) git bash
+
+Open Git bash and check current directory use command pwd(print working directory) If you are folder available in other directory use this command to change directory
+Cd ( directory location)
+
+Cd “F:\Anusha\week1”
+
+
+ 
+Step 4:- Git Commands: Working With Local Repositories(default branch master)
+
+1.	git init
+
+•	The command git init is used to create an empty Git repository.
+•	After the git init command is used, a .git folder is created in the directory with some subdirectories. Once the repository is initialized, the process of creating other files begins.
+
+
+2.	git config
+
+•	The git config command is used initially to configure the user.name and user.email. This specifies what email id and username will be used from a local repository.
+•	When git config is used with --global flag, it writes the settings to all repositories on the computer.
+
+git config –global user.name “user name” git config –global user.email “email id”
+ 
+
+
+3.	git add
+
+•	Add command is used after checking the status of the files, to add those files to the staging area.
+•	Before running the commit command, "git add" is used to add any new or modified files.
+ 
+git add . (or) git add file name
+
+
+4.	git commit
+
+•	The commit command makes sure that the changes are saved to the local repository.
+•	The command "git commit –m <message>" allows you to describe everyone and help them understand what has happened.
+
+git commit -m “commit message”
+
+
+5.	git status
+
+•	The git status command tells the current state of the repository.
+•	The command provides the current working branch. If the files are in the staging area, but not committed, it will be shown by the git status. Also, if there are no changes, it will show the message no changes to commit, working directory clean.
+
+
+6.	git log
+
+•	The git log command shows the order of the commit history for a repository.
+ 
+•	The command helps in understanding the state of the current branch by showing the commits that lead to this state.
+
+
+Step5:-Git Commands: Working With Remote Repositories
+
+a.	First Create GitHub Account and Login
+
+
+
+b.	Next create new Repository
+ 
+
+7.	git remote
+
+•	The git remote command is used to create, view, and delete connections to other repositories.
+•	The connections here are not like direct links into other repositories, but as bookmarks that serve as convenient names to be used as a reference.
+
+Git remote add origin <address>
+ 
+ 
+
+
+8.	git push
+
+•	The command git push is used to transfer the commits or pushing the content from the local repository to the remote repository.
+•	The command is used after a local repository has been modified, and the modifications are to be shared with the remote team members.
+
+git push –u origin master
+
+
+
+
+9.	git clone
+
+The git clone command is used to create a local working copy of an existing remote repository.
+
+•	The command downloads the remote repository to the computer. It is equivalent to the Git init command when working with a remote repository.
+
+Git clone <remote URL>
+
+10.	git pull
+
+•	The git pull command is used to fetch and merge changes from the remote repository to the local repository.
+•	The command "git pull origin master" copies all the files from the master branch of the remote repository to the local repository.
+
+Git pull <branch name> <remote URL>
