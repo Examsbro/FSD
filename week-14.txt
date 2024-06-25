@@ -5,20 +5,28 @@ Fetch user details from server using REST API and show in profile menu using Dja
 
 Step1:Check Python version
  python –version
+
 Step2: Install virtual environment
  py –m pip install virtualenv
+
 Step3: create an virtual environment
  py –m venv second
+
 Step4: activate the environment
  .\second\scripts\activate
+
 Step5: install django package
  pip install Django and pip install djangorestframework
+
 Step6: create a project
  django-admin startproject program14
+
 Step7: create a text file
  pip freeze > requirements.txt
+
 Step 8: move to project folder
  cd program14
+
 Step 9: create an application
  django-admin startapp api
  django-admin startapp base
