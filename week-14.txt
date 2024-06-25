@@ -92,7 +92,7 @@ path('',include('api.urls'))
 import os
 installed apps => 'rest_framework',
 'base',
-templates =>DIRS =>os.path.join(BASE_DIR,’templates’)
+templates =>DIRS =>os.path.join(BASE_DIR,'templates')
 
 
 Step 12: open sub folder base
