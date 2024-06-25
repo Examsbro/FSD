@@ -5,129 +5,129 @@ Design Single Page Application with different menu items using react.
 Code:-
 
 •	Layout.js
-1.	import './Layout.css';
-2.	import { Outlet, Link } from "react-router-dom"; 3.
-4.	const Layout = () => {
-5.	return (
-6.	<>
-7.
-8.	<nav className="App-header">
-9.	<ul>
-10.	<li className="logo">
-11.	<h1>MyWorld</h1>
-12.	</li>
-13.	<li>
-14.	<Link to="/" className="no">Home</Link>
-15.	</li>
-16.	<li>
-17.	<Link to="/blogs" className="no">Blogs</Link>
-18.	</li>
-19.	<li>
-20.	<Link to="/contact" className="no">Contact</Link>
-21.	</li>
-22.	</ul>
-23.	</nav>
-24.	
-25.	<Outlet />
-26.	
+import './Layout.css';
+import { Outlet, Link } from "react-router-dom"; 3.
+const Layout = () => {
+return (
+<>
+
+<nav className="App-header">
+<ul>
+<li className="logo">
+<h1>MyWorld</h1>
+</li>
+<li>
+<Link to="/" className="no">Home</Link>
+</li>
+<li>
+<Link to="/blogs" className="no">Blogs</Link>
+</li>
+<li>
+<Link to="/contact" className="no">Contact</Link>
+</li>
+</ul>
+</nav>
+	
+<Outlet />
+	
  
-27.	</>
-28. )
-29.};
-30.
-31.export default Layout;
+</>
+)
+};
+
+export default Layout;
 
 •	Layout.css
-1.	.App-header{background-color:aqua;}
-2.	li{
-3.	list-style: none;
-4. }
-5.	ul {
-6.	display: flex;
-7.	justify-content: flex-start;
-8.	gap: 20px;
-9.	height:50px;
-10.}
-11.
-12..logo{
+.App-header{background-color:aqua;}
+	li{
+list-style: none;
+}
+ul {
+display: flex;
+justify-content: flex-start;
+gap: 20px;
+height:50px;
+}
 
-13.	line-height:10px	;
-14.		
-15.}		
-16.		
-17.	.no{
-18.	text-decoration: none;
-19.	line-height:50px ;
-20.	font-weight: bold;
-21.	
-22.	}
-23.	
+.logo{
+
+line-height:10px	;
+		
+}		
+		
+.no{
+text-decoration: none;
+line-height:50px ;
+font-weight: bold;
+	
+}
+	
 
 •	Home.js
-1.	const Home = () => {
-2.	return <h1>Home</h1>;
-3.	};
-4.
-5.	export default Home;
+const Home = () => {
+return <h1>Home</h1>;
+};
+
+export default Home;
 
 •	Contact.js
-1.	const Contact = () => {
-2.	return <h1>Contact Me</h1>;
-3. };
-4.
-5. export default Contact;
+const Contact = () => {
+return <h1>Contact Me</h1>;
+};
+
+export default Contact;
 
 •	Blogs.js
-1.	const Blogs = () => {
-2.	return <h1>Blog Articles</h1>;
-3. };
-4.
-5. export default Blogs;
+const Blogs = () => {
+return <h1>Blog Articles</h1>;
+};
+
+export default Blogs;
 
 •	NoPage.js
  
-1.	const NoPage = () => {
-2.	return <h1>404</h1>;
-3. };
-4.
-5. export default NoPage;
+const NoPage = () => {
+return <h1>404</h1>;
+};
+
+export default NoPage;
 
 Open src folder write code inside index.js
 •	index.js
 
-1.	import React from 'react';
-2.	import ReactDOM from 'react-dom/client';
-3.	import './index.css';
-4.	
-5.	import reportWebVitals from './reportWebVitals';
-6.	import { BrowserRouter, Routes, Route } from "react-router-dom";
-7.	import Layout from "./pages/Layout";
-8.	import Home from "./pages/Home";
-9.	import Blogs from "./pages/Blogs";
-10.	import Contact from "./pages/Contact";
-11.	import NoPage from "./pages/NoPage"; 12.
-13.	const root = ReactDOM.createRoot(document.getElementById('root'));
-14.	export default function App1() {
-15.	return (
-16.	<BrowserRouter>
-17.	<Routes>
-18.	<Route path="/" element={<Layout />}>
-19.	<Route index element={<Home />} />
-20.	<Route path="blogs" element={<Blogs />} />
-21.	<Route path="contact" element={<Contact />} />
-22.	<Route path="*" element={<NoPage />} />
-23.	</Route>
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+	
+import reportWebVitals from './reportWebVitals';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Layout from "./pages/Layout";
+import Home from "./pages/Home";
+import Blogs from "./pages/Blogs";
+import Contact from "./pages/Contact";
+import NoPage from "./pages/NoPage"; 
+const root = ReactDOM.createRoot(document.getElementById('root'));
+export default function App1() {
+return (
+<BrowserRouter>
+<Routes>
+<Route path="/" element={<Layout />}>
+<Route index element={<Home />} />
+<Route path="blogs" element={<Blogs />} />
+<Route path="contact" element={<Contact />} />
+<Route path="*" element={<NoPage />} />
+</Route>
 
-24.		</Routes>
-25.		</BrowserRouter>
-26.	);	
-27.}		
-28.		
-29.	root.render(
-30.	<React.StrictMode>
-31.	<App1 />
-32.	
-33.	</React.StrictMode>
-34.);
-35.
-36.reportWebVitals();
+</Routes>
+</BrowserRouter>
+);	
+}		
+		
+root.render(
+<React.StrictMode>
+<App1 />
+	
+</React.StrictMode>
+);
+
+reportWebVitals();
