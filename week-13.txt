@@ -20,99 +20,99 @@ Step 8: open project program13 inside create templates folder.
 Templates folder inside create home.html, contactUs.html and dashboard.html
 Add the below code
  home.html 1. <!DOCTYPE html> 
-2. <html lang="en"> 
-3. <head> 
-4. <meta charset="UTF-8"> 
-5. <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-6. <title>Home</title> 
-7. <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> 
-8. <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> 
-9. </head> 
-10. <body> 
-11. <h1 class="text-center">Welcome to CMRIT</h1> 
-12. <nav class="navbar navbar-expand-lg bg-body-tertiary"> 
-13. <div class="container-fluid"> 
-14. <a class="navbar-brand" href="#">CMRIT</a>
-15. <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> 
-16. <span class="navbar-toggler-icon"></span> 
-17. </button> 
-18. <div class="collapse navbar-collapse" id="navbarNav"> 
-19. <ul class="navbar-nav"> 
-20. <li class="nav-item"> 
-21. <a class="nav-link active" aria-current="page" href="#">Home</a> 
-22. </li> 
-23. <li class="nav-item"> 
-24. <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a> 
-25. </li> 
-26. <li class="nav-item"> 
-27. <a class="nav-link" href="{% url 'contactUs' %}">ContactUs</a> 
-28. </li> 
-29. </ul> 
-30. </div> 
-31. </div> 
-32. </nav> 
-33. 
-34. </body> 
-35. </html>
+<html lang="en"> 
+<head> 
+<meta charset="UTF-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<title>Home</title> 
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> 
+</head> 
+<body> 
+<h1 class="text-center">Welcome to CMRIT</h1> 
+<nav class="navbar navbar-expand-lg bg-body-tertiary"> 
+<div class="container-fluid"> 
+<a class="navbar-brand" href="#">CMRIT</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> 
+<span class="navbar-toggler-icon"></span> 
+</button> 
+<div class="collapse navbar-collapse" id="navbarNav"> 
+<ul class="navbar-nav"> 
+<li class="nav-item"> 
+<a class="nav-link active" aria-current="page" href="#">Home</a> 
+</li> 
+<li class="nav-item"> 
+<a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a> 
+</li> 
+<li class="nav-item"> 
+<a class="nav-link" href="{% url 'contactUs' %}">ContactUs</a> 
+</li> 
+</ul> 
+</div> 
+</div> 
+</nav>  
+</body> 
+</html>
 
  contactUs.html 
-1. <!DOCTYPE html> 
-2. <html lang="en"> 
-3. <head>
-4. <meta charset="UTF-8"> 
-5. <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-6. <title>ContactUs</title> 
-7. </head> 
-8. <body> 
-9. <h1>CMR Institue of Technology,Medchal, Hyderabad.</h1> 
-10. <a href="{% url 'home' %}">Back to home</a> 
-11. </body> 
-12. </html>
+<!DOCTYPE html> 
+<html lang="en"> 
+<head>
+<meta charset="UTF-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<title>ContactUs</title> 
+</head> 
+<body> 
+<h1>CMR Institue of Technology,Medchal, Hyderabad.</h1> 
+<a href="{% url 'home' %}">Back to home</a> 
+</body> 
+</html>
 
  dashboard.html 
-1. <!DOCTYPE html> 
-2. <html lang="en"> 
-3. <head> 
-4. <meta charset="UTF-8">
-5. <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-6. <title>Dashboard</title> 
-7. </head> 
-8. <body> 
-9. <h1>Welcome to CMRIT Dashboard</h1> 
-10. <a href="{% url 'home' %}">Back to home</a> 
-11. </body> 
-12. </html>
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<title>Dashboard</title> 
+</head> 
+<body> 
+<h1>Welcome to CMRIT Dashboard</h1> 
+<a href="{% url 'home' %}">Back to home</a> 
+</body> 
+</html>
 Step 9: open project program13 subfolder Write below code
 
  urls.py
-1. from django.contrib import admin 
-2. from django.urls import path 
-3. from . import index 
-4. urlpatterns = [ 
-5. #path('admin/', admin.site.urls), 
-6. path('',index.home,name='home'),
- 7. path('dashboard/', index.dashboard,name='dashboard'), 
-8. path('contactUs/', index.contactUs,name='contactUs'), 
-9. ]
+from django.contrib import admin
+from django.urls import path
+from . import index
+
+urlpatterns = [
+    #path('admin/', admin.site.urls),
+     path('',index.home,name='home'),
+    path('dashboard/', index.dashboard,name='dashboard'),
+    path('contactUs/', index.contactUs,name='contactUs'),
+]
 
  settings.py
 
-1. import os
-2. templates =>DIRS =>os.path.join(BASE_DIR,’templates’)
+import os
+templates =>DIRS =>os.path.join(BASE_DIR,’templates’)
 
  index.py 
 
-1. from django.http import HttpResponse 
-2. from django.shortcuts import render
-3. 
-4. def home(request): 
-5. return render(request,'home.html') 
-6. 
-7. def dashboard(request): 
-8. return render(request,'dashboard.html') 
-9. 
-10. def contactUs(request): 
-11. return render(request,'contactUs.html')
+from django.http import HttpResponse
+from django.shortcuts import render
+
+def home(request):
+    return render(request,'home.html')
+
+def dashboard(request):
+    return render(request,'dashboard.html')
+
+def contactUs(request):
+    return render(request,'contactUs.html')
 
 Step 10: run the server
 
