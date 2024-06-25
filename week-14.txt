@@ -347,9 +347,11 @@ console.log(data);
 
 
 Step 14:migrate the changes
+
  py manage.py makemigrations
  py manage.py migrate
+
 Step 15: run the server
  py manage.py runserver
+
 Step 16: open browser, run http://127.0.0.1:8000/
-Output:-
