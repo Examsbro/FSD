@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <style>
+        fieldset {
+            width: 500px;
+            background-image: url(n1.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        table tr td {
+            padding-top: 6px;
+            padding-bottom: 6px;
+        }
+        body {
+            color: white;
+        }
+    </style>
+    <script>
+        function validate() {
+            let fn = document.forms["frm"]["fname"].value;
+            for (let x = 0; x < fn.length; x++) {
+                let ch = fn.charCodeAt(x);
+                if ((ch < 65 || ch > 90) && (ch < 97 || ch > 122)) {
+                    alert("Invalid first name");
+                    return false;
+                }
+            }
+            
+            let ln = document.forms["frm"]["lname"].value;
+            for (let x = 0; x < ln.length; x++) {
+                let ch = ln.charCodeAt(x);
+                if ((ch < 65 || ch > 90) && (ch < 97 || ch > 122)) {
+                    alert("Invalid last name");
+                    return false;
+                }
+            }
+
+            let phn = document.forms["frm"]["phone"].value;
+            if (isNaN(phn) || phn.length !== 10) {
+                alert("Phone number should be exactly 10 digits and numeric");
+                return false;
+            }
+
+            let mail = document.forms["frm"]["email"].value;
+            let reg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!reg.test(mail)) {
+                alert("Invalid email");
+                return false;
+            }
+
+            let pwd = document.forms["frm"]["pwd"].value;
+            if (pwd.length > 8) {
+                alert("Password should not exceed 8 characters");
+                return false;
+            }
+            
+            return true;
+        }
+    </script>
+</head>
+<body style="background-image: url(nature.jpg); background-repeat: no-repeat; background-size: cover">
+    <center>
+        <h2>Registration</h2>
+        <form name="frm" method="post" action="success.html" onsubmit="return validate()">
+            <fieldset>
+                <table>
+                    <tr>
+                        <td>First Name:</td>
+                        <td><input type="text" name="fname" required /></td>
+                    </tr>
+                    <tr>
+                        <td>Last Name:</td>
+                        <td><input type="text" name="lname" required /></td>
+                    </tr>
+                    <tr>
+                        <td>Phone no.:</td>
+                        <td><input type="text" name="phone" required /></td>
+                    </tr>
+                    <tr>
+                        <td>Mail Id:</td>
+                        <td><input type="email" name="email" required /></td>
+                    </tr>
+                    <tr>
+                        <td>Gender:</td>
+                        <td>Male: <input type="radio" name="gender" value="male" required /> Female: <input type="radio" name="gender" value="female" required /></td>
+                    </tr>
+                    <tr>
+                        <td>DOB:</td>
+                        <td><input type="date" name="dob" required /></td>
+                    </tr>
+                    <tr>
+                        <td>User Name:</td>
+                        <td><input type="text" name="uname" required /></td>
+                    </tr>
+                    <tr>
+                        <td>Password:</td>
+                        <td><input type="password" name="pwd" required /></td>
+                    </tr>
+                    <tr>
+                        <td>Age:</td>
+                        <td><input type="number" name="age" required /></td>
+                    </tr>
+                </table>
+                <input type="submit" value="Register" name="submit" />
+                <a href="login.html"><input type="button" value="Login" name="submit" /></a>
+            </fieldset>
+            <p>Copyright CMRIT_2024</p>
+        </form>
+    </center>
+</body>
+</html>

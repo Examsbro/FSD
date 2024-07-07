@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login page</title>
+    <style>
+        fieldset{
+            width:500px;
+            background-image:url(nature.jpg);
+            background-repeat:no-repeat;
+            background-size:cover;
+        }
+        table tr td{
+            padding-top:6px;
+            padding-bottom:6px;
+        }
+        
+    </style>
+</head>
+<script>
+    function validate(){
+        
+        let p1=document.frm.pwd.value;
+        let p2=p1.length;
+        if(p2<8)
+        {
+          alert("Password should not exceed 8 digits");
+          return false;
+        }
+        return true;
+    }
+</script>
+<body style="background-image:url(n1.jpg);background-repeat:no-repeat;background-size:cover">
+    <center>
+        <h2>Login</h2>
+<form name="frm" method="post" action="abc.html" onSubmit="return validate()">
+<fieldset>
+    <table>
+
+<tr><td>User Name:</td><td><input type="text" name="uname" value="" required/> </td></tr>
+<tr><td>Password:</td><td><input type="password" name="pwd" value="" required/> </td></tr>
+</table>
+    <input type="submit" value="Login" name="submit"/>
+    <a href="Registration.html"><input type="button" value="Registration" name="submit"/></a>
+</fieldset>
+
+<p>Copyright CMRIT_2024</p>
+</form>
+    </center>
+</body>
+</html>
