@@ -1,0 +1,8 @@
+python -version
+py -m pip install virtualenv
+py -m venv second
+.\second\scripts\activate
+pip install Django
+django-admin startproject program13
+cd program13
+py manage.py runserver
