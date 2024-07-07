@@ -2,8 +2,6 @@ const {MongoClient} =require('mongodb');
 const url = 'mongodb://127.0.0.1:27017';
 const client= new MongoClient(url);
 let collection;
-//can also export like as follows
-// module.exports={getData,insertData};
 
 async function connectDB(dbname,table)
 {
