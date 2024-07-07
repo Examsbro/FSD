@@ -10,7 +10,6 @@ $("#loginForm").submit((event)=>{
 event.preventDefault();
 var name = $("#username").val();
 var password=$("#pwd").val();
-//generateToken by making a service call to /auth with post
 $.ajax({
 url:"/auth",
 type:"POST",
@@ -46,7 +45,6 @@ if(tokenData.login==true){
 function verifyLogin(token)
 {
   let result=true;
-  //verifyToken by making a service call to /verifyToken with get
   $.ajax({
     url:"/verifyToken",
     type:"POST",
